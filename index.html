@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Cris Ortega — copywriting que transforma palavras em vendas. Páginas de vendas, anúncios, e-mails e funis completos.">
+  <title>Cris Ortega — Copywriting que vende</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons (Remix Icon) -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b0c10;
+      --surface: rgba(255,255,255,0.06);
+      --text: #e8eef2;
+      --muted: #b2c2cc;
+      --primary: #8b5cf6; /* roxo */
+      --secondary: #22d3ee; /* ciano */
+      --gradient: linear-gradient(135deg, #7c3aed 0%, #22d3ee 100%);
+      --glass: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.18);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 16px;
+      --radius-lg: 24px;
+      --container: 1200px;
+    }
+    [data-theme="light"]{
+      --bg: #f7f8fa;
+      --surface: rgba(0,0,0,0.05);
+      --text: #1a202c;
+      --muted: #4a5568;
+      --glass: rgba(255,255,255,0.65);
+      --border: rgba(0,0,0,0.06);
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height:1.6;
+    }
+
+    /* Container */
+    .container{max-width: var(--container); padding: 0 24px; margin: 0 auto;}
+
+    /* Navbar */
+    .nav{
+      position: sticky; top:0; z-index: 50;
+      backdrop-filter: saturate(140%) blur(14px);
+      background: linear-gradient(180deg, rgba(0,0,0,0.35), transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text);
+      font-weight:800; letter-spacing:0.2px;
+    }
+    .brand .logo{
+      width:40px; height:40px; border-radius:50%;
+      background: var(--gradient);
+      box-shadow: 0 8px 24px rgba(124,58,237,0.35);
+      display:grid; place-items:center; color:white;
+    }
+    .nav-links{display:flex; gap:20px; align-items:center;}
+    .nav-links a{
+      color: var(--muted); text-decoration:none; font-weight:500; padding:8px 10px; border-radius:10px;
+    }
+    .nav-links a:hover{color: var(--text); background: var(--surface);}
+    .cta{
+      background: var(--gradient); color:#0b0c10; border:none; padding:10px 16px; border-radius:12px; font-weight:700;
+      cursor:pointer; transition: transform .2s ease, box-shadow .2s ease; box-shadow: 0 6px 18px rgba(34,211,238,0.22);
+    }
+    .cta:hover{transform: translateY(-2px)}
+    .theme-toggle{
+      background: var(--surface); border:1px solid var(--border); color:var(--text);
+      padding:8px 10px; border-radius:10px; cursor:pointer;
+    }
+
+    /* Hero */
+    .hero{
+      position: relative; overflow:hidden;
+      padding: 96px 0 64px;
+      background:
+        radial-gradient(1200px 600px at 90% -10%, rgba(34,211,238,0.12), transparent 60%),
+        radial-gradient(1000px 600px at -10% 10%, rgba(124,58,237,0.18), transparent 55%);
+    }
+    .hero-grid{
+      display:grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items:center;
+    }
+    .kicker{color: var(--secondary); font-weight:700; letter-spacing:1px; text-transform:uppercase; font-size:12px;}
+    .hero h1{
+      font-family: "Playfair Display", serif;
+      font-weight:700; line-height:1.1; margin:10px 0 16px;
+      font-size: clamp(36px, 5vw, 64px);
+    }
+    .hero p{color: var(--muted); font-size: clamp(16px, 2vw, 18px); max-width: 52ch}
+    .hero-actions{display:flex; gap:14px; margin-top:22px; flex-wrap:wrap}
+    .btn-outline{
+      border:1px solid var(--border); background: var(--surface); color: var(--text);
+      padding:10px 16px; border-radius:12px; font-weight:600; cursor:pointer;
+    }
+
+    .mockup{
+      position:relative; perspective:1000px;
+    }
+    .mockup .card{
+      background: var(--glass); border:1px solid var(--border); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      transform: rotateY(-8deg) rotateX(3deg);
+      overflow:hidden;
+    }
+    .mockup img{
+      width:100%; height:auto; display:block; filter: saturate(1.05) contrast(1.02);
+    }
+    .floating{
+      position:absolute; inset:auto auto -20px -20px; width:220px; padding:14px 16px; border-radius:16px;
+      background: var(--bg); border:1px solid var(--border); box-shadow: var(--shadow);
+      animation: floatY 5s ease-in-out infinite;
+    }
+    @keyframes floatY { 0%,100%{ transform: translateY(0)} 50%{ transform: translateY(-10px)} }
+    .floating .row{display:flex; align-items:center; gap:10px; margin-bottom:8px}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px; font-size:12px; color:var(--muted);
+      background: var(--surface); padding:6px 10px; border-radius:999px; border:1px solid var(--border);
+    }
+
+    /* Logos */
+    .logos{opacity:0.9; padding: 10px 0 34px}
+    .logos .wrap{
+      display:grid; grid-template-columns: repeat(5,1fr); gap:22px; align-items:center; justify-items:center;
+      filter: grayscale(1) contrast(1.1) opacity(0.75);
+    }
+    .logos img{max-height:28px; width:auto}
+
+    /* Section base */
+    section{padding: 80px 0}
+    .section-header{max-width:760px; margin: 0 auto 36px; text-align:center}
+    .eyebrow{
+      display:inline-block; padding:6px 12px; border-radius:999px; font-weight:700; font-size:12px;
+      background: var(--surface); border:1px solid var(--border); color: var(--muted); letter-spacing:.6px; text-transform:uppercase;
+    }
+    .section-title{
+      font-family: "Playfair Display", serif; font-size: clamp(28px, 4vw, 44px); margin: 12px 0 8px;
+    }
+    .section-sub{color: var(--muted)}
+
+    /* Services */
+    .grid{display:grid; gap:22px}
+    .grid-3{grid-template-columns: repeat(auto-fit,minmax(260px,1fr))}
+    .card{
+      background: var(--glass); border:1px solid var(--border); border-radius: var(--radius); padding:22px;
+      box-shadow: var(--shadow); position:relative; overflow:hidden; transform-style: preserve-3d;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .card:hover{transform: translateY(-4px)}
+    .card i{font-size:24px; color: var(--secondary)}
+    .card h3{margin:10px 0 8px}
+    .card p{color: var(--muted)}
+
+    /* Process */
+    .steps{counter-reset: step}
+    .step{
+      display:flex; gap:16px; padding:18px; border-radius:14px; background: var(--surface); border:1px solid var(--border);
+      align-items:flex-start;
+    }
+    .step:before{
+      counter-increment: step; content: counter(step);
+      width:32px; height:32px; border-radius:8px; display:grid; place-items:center;
+      background: var(--gradient); color:#0b0c10; font-weight:800; flex:0 0 auto;
+    }
+
+    /* Case studies */
+    .case-tech{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .chip{
+      font-size:12px; padding:6px 10px; border-radius:999px; background: var(--surface); border:1px solid var(--border); color: var(--muted);
+    }
+    .metric{display:inline-flex; align-items:center; gap:8px; background: rgba(16,185,129,0.12); color:#a7f3d0; border:1px solid rgba(16,185,129,0.25); padding:6px 10px; border-radius:999px; font-size:12px}
+    .metric i{color:#34d399}
+
+    /* Portfolio */
+    .portfolio{
+      display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:18px;
+    }
+    .shot{
+      position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--border); background: var(--surface);
+    }
+    .shot img{width:100%; height:220px; object-fit:cover; display:block; transition: transform .5s ease}
+    .shot:hover img{transform: scale(1.05)}
+    .shot .label{
+      position:absolute; left:12px; bottom:12px; background: rgba(0,0,0,0.55); color:white; padding:6px 10px; border-radius:999px; font-size:12px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Testimonials slider */
+    .slider{
+      position:relative; overflow:hidden;
+      border-radius:20px; border:1px solid var(--border); background: var(--glass); box-shadow: var(--shadow);
+    }
+    .slides{display:flex; transition: transform .6s cubic-bezier(.2,.6,.2,1)}
+    .testimonial{
+      min-width:100%; padding:28px; display:grid; gap:12px; align-items:center;
+    }
+    .stars{color: #fbbf24}
+    .t-author{display:flex; align-items:center; gap:12px}
+    .t-author img{width:42px; height:42px; border-radius:50%; object-fit:cover}
+    .slider-controls{position:absolute; inset:auto 10px 10px auto; display:flex; gap:8px}
+    .pill{
+      width:10px; height:10px; border-radius:50%; background: var(--surface); border:1px solid var(--border); cursor:pointer;
+    }
+    .pill.active{background: var(--secondary)}
+
+    /* Pricing */
+    .pricing{display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:22px}
+    .price-card .tag{
+      display:inline-block; padding:6px 10px; border-radius:999px; background: var(--surface); border:1px solid var(--border); color: var(--muted); font-size:12px;
+      margin-bottom:8px;
+    }
+    .price{font-size:32px; font-weight:800; margin:6px 0 12px}
+    .features{display:grid; gap:8px; margin: 12px 0 16px}
+    .features li{display:flex; gap:10px; align-items:flex-start}
+    .features i{color: #34d399}
+
+    /* FAQ */
+    .faq details{
+      border:1px solid var(--border); background: var(--surface); border-radius:14px; padding:14px 16px;
+    }
+    .faq summary{cursor:pointer; font-weight:700; outline:none}
+    .faq details[open]{background: var(--glass)}
+
+    /* Contact */
+    .contact{
+      display:grid; grid-template-columns: 1.1fr 0.9fr; gap:24px;
+    }
+    form{
+      display:grid; gap:14px; background: var(--glass); border:1px solid var(--border); border-radius:16px; padding:20px;
+    }
+    .field{display:grid; gap:8px}
+    .field input, .field textarea, .field select{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background: var(--surface); color: var(--text);
+      outline:none;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus{border-color: var(--secondary)}
+    .note{color: var(--muted); font-size: 14px}
+
+    /* Footer */
+    footer{
+      padding:24px 0 36px; border-top:1px solid var(--border); color: var(--muted);
+    }
+    .foot{
+      display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    }
+    .social a{
+      color: var(--muted); margin-right:12px; text-decoration:none; font-size:20px;
+    }
+    .social a:hover{color: var(--text)}
+
+    /* Reveal animations */
+    .reveal{opacity:0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease}
+    .reveal.in{opacity:1; transform: translateY(0)}
+
+    /* Back to top */
+    .to-top{
+      position:fixed; right:18px; bottom:18px; width:42px; height:42px; border-radius:12px;
+      background: var(--gradient); border:none; color:#0b0c10; display:grid; place-items:center; cursor:pointer;
+      box-shadow: 0 10px 24px rgba(34,211,238,.25); opacity:0; visibility:hidden; transform: translateY(10px);
+      transition: all .3s ease;
+    }
+    .to-top.show{opacity:1; visibility:visible; transform: translateY(0)}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero-grid{grid-template-columns: 1fr; gap: 28px}
+      .contact{grid-template-columns: 1fr}
+      .logos .wrap{grid-template-columns: repeat(3,1fr)}
+    }
+    @media (max-width: 600px){
+      .nav-links{display:none}
+      .logos .wrap{grid-template-columns: repeat(2,1fr)}
+      .floating{display:none}
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#">
+        <span class="logo"><i class="ri-pen-nib-fill"></i></span>
+        <span>Cris Ortega</span>
+      </a>
+      <div class="nav-links">
+        <a href="#servicos">Serviços</a>
+        <a href="#processo">Processo</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#cases">Estudos de caso</a>
+        <a href="#planos">Planos</a>
+        <a href="#contato">Contato</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema"><i class="ri-sun-line"></i></button>
+        <button class="cta" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Solicitar Orçamento</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="kicker">Copy que vende</span>
+        <h1>Transformo palavras em conversões reais para produtos e serviços.</h1>
+        <p>Da primeira impressão ao clique final. Páginas de venda, anúncios, e-mails e funis inteiros — com estratégia, clareza e autoridade.</p>
+        <div class="hero-actions">
+          <button class="cta" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Quero aumentar minhas vendas</button>
+          <a class="btn-outline" href="#portfolio">Ver exemplos</a>
+        </div>
+        <div class="badge" style="margin-top:16px;">
+          <i class="ri-check-line"></i> Prazos ágeis • Estrutura testada • Resultados mensuráveis
+        </div>
+      </div>
+      <div class="mockup">
+        <div class="card" id="tiltCard">
+          <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1400&auto=format&fit=crop" alt="Mockup de página de vendas">
+        </div>
+        <div class="floating">
+          <div class="row"><i class="ri-line-chart-fill" style="color:#34d399"></i> +37% taxa de conversão</div>
+          <div class="row"><i class="ri-time-fill" style="color:#f59e0b"></i> Entrega média: 5 dias</div>
+          <div class="badge"><i class="ri-shield-star-line"></i> Estratégia + Copy + UX</div>
+        </div>
+      </div>
+    </div>
+    <div class="container logos">
+      <div class="wrap">
+        <img alt="BeautyNatura — Cosméticos Veganos" src="https://dummyimage.com/120x28/777/fff&text=BeautyNatura" loading="lazy">
+        <img alt="TechZoneApp — SaaS Equipes" src="https://dummyimage.com/120x28/777/fff&text=TechZoneApp" loading="lazy">
+        <img alt="EduSmart+ — ENEM" src="https://dummyimage.com/120x28/777/fff&text=EduSmart%2B" loading="lazy">
+        <img alt="CasaVerde+ — Decoração" src="https://dummyimage.com/120x28/777/fff&text=CasaVerde%2B" loading="lazy">
+        <img alt="FitStore+ — Suplementos" src="https://dummyimage.com/120x28/777/fff&text=FitStore%2B" loading="lazy">
+      </div>
+    </div>
+  </header>
+
+  <!-- Serviços -->
+  <section id="servicos">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">O que eu entrego</span>
+        <h2 class="section-title">Serviços de copywriting para cada etapa do funil</h2>
+        <p class="section-sub">Do anúncio ao checkout — textos persuasivos, pesquisa de público e proposta de valor clara.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card reveal tilt">
+          <i class="ri-rocket-2-fill"></i>
+          <h3>Páginas de Venda</h3>
+          <p>Headline, promessa, benefícios, prova social e CTA. Estrutura completa e pensada para conversão.</p>
+        </div>
+        <div class="card reveal tilt">
+          <i class="ri-megaphone-fill"></i>
+          <h3>Anúncios (Meta/Google)</h3>
+          <p>Variantes de copy por segmento e jornada. Testes A/B e foco em CTR e CPA.</p>
+        </div>
+        <div class="card reveal tilt">
+          <i class="ri-mail-open-fill"></i>
+          <h3>E-mails e Nutrição</h3>
+          <p>Sequências de boas-vindas, carrinho abandonado e campanhas sazonais com storytelling.</p>
+        </div>
+        <div class="card reveal tilt">
+          <i class="ri-chat-4-fill"></i>
+          <h3>Redes Sociais que Vendem</h3>
+          <p>Posts e roteiros de vídeo com ganchos fortes e CTAs claros — sem parecer “forçado”.</p>
+        </div>
+        <div class="card reveal tilt">
+          <i class="ri-lightbulb-flash-fill"></i>
+          <h3>Consultoria & Diagnóstico</h3>
+          <p>Auditoria da sua copy atual, mapa de oportunidades e priorização de testes.</p>
+        </div>
+        <div class="card reveal tilt">
+          <i class="ri-flow-chart"></i>
+          <h3>Funil Completo</h3>
+          <p>Copy para todas as etapas: anúncios, landing, e-mails e scripts de venda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Processo (narrativa aprimorada) -->
+  <section id="processo">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Como eu trabalho</span>
+        <h2 class="section-title">Processo claro, foco em resultado</h2>
+        <p class="section-sub">Do diagnóstico à otimização contínua, sem ruído e com prazos realistas.</p>
+      </div>
+      <div class="grid grid-3 steps">
+        <div class="step reveal">
+          <div>
+            <h3>Diagnóstico rápido</h3>
+            <p class="section-sub">Você me conta produto, público e desafio. Em até 24h, devolvo análise inicial com oportunidades de copy e priorização.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div>
+            <h3>Estratégia de copy</h3>
+            <p class="section-sub">Defino promessa central, ângulos, objeções, provas e a estrutura ideal para página, anúncio, e-mail ou funil.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div>
+            <h3>Redação & UX</h3>
+            <p class="section-sub">Texto persuasivo com ritmo, clareza e escaneabilidade. Incluo sugestões de layout e microcopy (botões, formulários, banners).</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div>
+            <h3>Teste & otimização</h3>
+            <p class="section-sub">Variantes de headline/CTA, hipóteses de teste A/B e ajustes por métricas (conversão, CTR, CPA, reply rate).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfólio -->
+  <section id="portfolio">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Resultados na prática</span>
+        <h2 class="section-title">Exemplos de páginas e criativos</h2>
+        <p class="section-sub">Alguns recortes de trabalhos e layouts (imagens ilustrativas).</p>
+      </div>
+      <div class="portfolio">
+        <a class="shot reveal" href="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1400&auto=format&fit=crop" target="_blank" rel="noreferrer">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200&auto=format&fit=crop" alt="Landing de serviço">
+          <span class="label">Página de Serviço</span>
+        </a>
+        <a class="shot reveal" href="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1400&auto=format&fit=crop" target="_blank" rel="noreferrer">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop" alt="Página de vendas">
+          <span class="label">Página de Vendas</span>
+        </a>
+        <a class="shot reveal" href="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1400&auto=format&fit=crop" target="_blank" rel="noreferrer">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop" alt="Campanha de anúncios">
+          <span class="label">Campanhas</span>
+        </a>
+        <a class="shot reveal" href="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1400&auto=format&fit=crop" target="_blank" rel="noreferrer">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop" alt="E-mails e funil">
+          <span class="label">E-mails</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estudos de caso (fictícios) -->
+  <section id="cases">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Aplicação da técnica</span>
+        <h2 class="section-title">Estudos de caso fictícios — o como e o porquê</h2>
+        <p class="section-sub">Cenários simulados para mostrar como a copy certa muda o jogo em diferentes segmentos.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card reveal">
+          <div class="badge"><i class="ri-flask-line"></i> BeautyNatura — E-commerce de cosméticos veganos</div>
+          <h3>CTR baixo em anúncios de topo de funil</h3>
+          <p>Diagnóstico mostrou promessa genérica e ausência de diferenciais na primeira dobra. Reposicionei a headline com especificidade e prova.</p>
+          <div class="case-tech">
+            <span class="chip">Headline com benefício tangível</span>
+            <span class="chip">Curiosidade + contraste</span>
+            <span class="chip">Prova social (nº pedidos)</span>
+            <span class="chip">CTA com objeção invertida</span>
+          </div>
+          <p style="margin-top:10px">
+            Resultado após 10 dias de teste A/B:
+            <span class="metric"><i class="ri-arrow-up-line"></i> +41% CTR</span>
+            <span class="metric"><i class="ri-arrow-down-line"></i> -23% CPA</span>
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <div class="badge"><i class="ri-flask-line"></i> TechZoneApp — SaaS B2B</div>
+          <h3>Trial sem tração para plano pago</h3>
+          <p>Onboarding falava de features, não de “job-to-be-done”. Reescrevi o fluxo com quick wins e microcopy nas fricções.</p>
+          <div class="case-tech">
+            <span class="chip">Promessa por papel (gestor)</span>
+            <span class="chip">Ganhos de ativação (D1/D7)</span>
+            <span class="chip">Microcopy anti-ansiedade</span>
+            <span class="chip">E-mails por momento</span>
+          </div>
+          <p style="margin-top:10px">
+            Em 30 dias:
+            <span class="metric"><i class="ri-arrow-up-line"></i> +18% ativação</span>
+            <span class="metric"><i class="ri-arrow-up-line"></i> +12% trial→pago</span>
+          </p>
+        </div>
+
+        <div class="card reveal">
+          <div class="badge"><i class="ri-flask-line"></i> EduSmart+ — Cursos ENEM</div>
+          <h3>Landing com alta taxa de rejeição</h3>
+          <p>Faltava alinhamento com dor específica e prova concreta. Ajustei a dobra, adicionei “aula grátis” e seção de objeções.</p>
+          <div class="case-tech">
+            <span class="chip">Headline por “dor” (tempo/nota)</span>
+            <span class="chip">Prova (aprovados + prints)</span>
+            <span class="chip">Oferta de baixo risco</span>
+            <span class="chip">Objeções “antes do scroll”</span>
+          </div>
+          <p style="margin-top:10px">
+            Em 2 semanas:
+            <span class="metric"><i class="ri-arrow-down-line"></i> -27% rejeição</span>
+            <span class="metric"><i class="ri-arrow-up-line"></i> +35% leads</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section id="depoimentos">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Prova social</span>
+        <h2 class="section-title">Clientes que confiaram e venderam mais</h2>
+      </div>
+      <div class="slider reveal" id="slider">
+        <div class="slides" id="slides">
+          <div class="testimonial">
+            <div class="stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></div>
+            <p>“A Cris redesenhou nossa página e os anúncios. Em duas semanas, o ROI subiu de 2,1 para 3,0.”</p>
+            <div class="t-author">
+              <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=200&auto=format&fit=crop" alt="Cliente">
+              <div><strong>Mariana S.</strong><br><span class="section-sub">E-commerce de beleza</span></div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <div class="stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-half-fill"></i></div>
+            <p>“Sequência de e-mails com storytelling que trouxe 28% de aumento no faturamento do mês.”</p>
+            <div class="t-author">
+              <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=200&auto=format&fit=crop" alt="Cliente">
+              <div><strong>Rafael L.</strong><br><span class="section-sub">SaaS B2B</span></div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <div class="stars"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></div>
+            <p>“Consultoria objetiva. Ajustamos a promessa e as objeções: CPL caiu 34%.”</p>
+            <div class="t-author">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Cliente">
+              <div><strong>Thiago P.</strong><br><span class="section-sub">Educação online</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls" id="sliderControls" aria-label="Navegação de depoimentos"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planos -->
+  <section id="planos">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Investimento</span>
+        <h2 class="section-title">Planos e formatos flexíveis</h2>
+      </div>
+      <div class="pricing">
+        <div class="card price-card reveal">
+          <span class="tag">Projeto</span>
+          <h3>Página de Vendas</h3>
+          <div class="price">R$ 1.200 — 3.500</div>
+          <ul class="features">
+            <li><i class="ri-check-line"></i> Estrutura completa + 2 revisões</li>
+            <li><i class="ri-check-line"></i> Pesquisa de avatar e objeções</li>
+            <li><i class="ri-check-line"></i> Sugestões de UX/Layouts</li>
+          </ul>
+          <button class="cta" onclick="gotoContato('Página de Vendas')">Quero este</button>
+        </div>
+        <div class="card price-card reveal">
+          <span class="tag">Pacote</span>
+          <h3>Anúncios + E-mails</h3>
+          <div class="price">R$ 1.500 — 4.000</div>
+          <ul class="features">
+            <li><i class="ri-check-line"></i> 10 variações de anúncios</li>
+            <li><i class="ri-check-line"></i> 5 e-mails estratégicos</li>
+            <li><i class="ri-check-line"></i> Testes A/B sugeridos</li>
+          </ul>
+          <button class="cta" onclick="gotoContato('Anúncios + E-mails')">Quero este</button>
+        </div>
+        <div class="card price-card reveal">
+          <span class="tag">Mensal</span>
+          <h3>Consultoria Contínua</h3>
+          <div class="price">R$ 1.200 — 5.000/mês</div>
+          <ul class="features">
+            <li><i class="ri-check-line"></i> 2 encontros/mês</li>
+            <li><i class="ri-check-line"></i> Revisão de copy ilimitada</li>
+            <li><i class="ri-check-line"></i> Roadmap de otimização</li>
+          </ul>
+          <button class="cta" onclick="gotoContato('Consultoria Mensal')">Quero este</button>
+        </div>
+      </div>
+      <p class="note" style="margin-top:10px">Valores variam conforme complexidade, prazo e escopo. Emissão de proposta após uma breve conversa.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Dúvidas</span>
+        <h2 class="section-title">Perguntas frequentes</h2>
+      </div>
+      <div class="grid grid-3 faq">
+        <details class="reveal">
+          <summary>Em quanto tempo recebo?</summary>
+          <p>Projeto típico de página de vendas leva 5–10 dias. Pacotes de anúncios/e-mails variam entre 3–7 dias.</p>
+        </details>
+        <details class="reveal">
+          <summary>Você também faz design?</summary>
+          <p>Entrego a copy com sugestões de layout/UX. Posso indicar designers parceiros se precisar do visual completo.</p>
+        </details>
+        <details class="reveal">
+          <summary>Como começamos?</summary>
+          <p>Agendamos uma imersão rápida (30–45min), alinhamos escopo/prazos e envio proposta com investimento e entregáveis.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow">Vamos conversar</span>
+        <h2 class="section-title">Conte sobre seu projeto</h2>
+        <p class="section-sub">Respondo em até 24h úteis. Se preferir, chame direto no WhatsApp.</p>
+      </div>
+      <div class="contact">
+        <form id="contactForm" novalidate>
+          <div class="field">
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" placeholder="Seu nome" required>
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" placeholder="voce@email.com" required>
+          </div>
+          <div class="field">
+            <label for="servico">Serviço de interesse</label>
+            <select id="servico" name="servico">
+              <option>Página de Vendas</option>
+              <option>Anúncios</option>
+              <option>E-mails</option>
+              <option>Consultoria</option>
+              <option>Funil Completo</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" rows="5" placeholder="Me conte sobre o produto/serviço, público e objetivo." required></textarea>
+          </div>
+          <div class="field">
+            <label for="orcamento">Faixa de orçamento (R$)</label>
+            <input id="orcamento" name="orcamento" type="text" placeholder="Ex.: 2.000 — 5.000">
+          </div>
+          <button class="cta" type="submit">Enviar mensagem</button>
+          <span class="note">Ou fale direto no WhatsApp: <strong><a href="https://wa.me/5512996250275" target="_blank" rel="noreferrer">12 99625-0275</a></strong></span>
+          <div id="formStatus" class="note"></div>
+        </form>
+
+        <div class="card reveal">
+          <h3>Por que me contratar?</h3>
+          <ul class="features">
+            <li><i class="ri-check-line"></i> Pesquisa antes da caneta: copy baseada em dados</li>
+            <li><i class="ri-check-line"></i> Clareza e posicionamento sem jargões</li>
+            <li><i class="ri-check-line"></i> Foco em métricas: conversão, CTR, CPA</li>
+            <li><i class="ri-check-line"></i> Comunicação simples e prazos cumpridos</li>
+          </ul>
+          <div class="badge"><i class="ri-map-pin-2-line"></i> São José dos Campos • Atendo Brasil e exterior</div>
+          <div class="badge"><i class="ri-phone-line"></i> Cris Ortega — WhatsApp: 12 99625-0275</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container foot">
+      <div>© <span id="year"></span> Cris Ortega. Todos os direitos reservados.</div>
+      <div class="social">
+        <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+        <a href="https://wa.me/5512996250275" target="_blank" rel="noreferrer" aria-label="WhatsApp"><i class="ri-whatsapp-line"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Voltar ao topo"><i class="ri-arrow-up-line"></i></button>
+
+  <script>
+    // Ano no footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Tema (dark/light) com persistência
+    (function(){
+      const root = document.documentElement;
+      const toggle = document.getElementById('themeToggle');
+      const saved = localStorage.getItem('theme');
+      if(saved){ root.setAttribute('data-theme', saved); updateIcon(saved); }
+      else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches){
+        root.setAttribute('data-theme','light'); updateIcon('light');
+      }
+      toggle.addEventListener('click', ()=> {
+        const current = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', current);
+        localStorage.setItem('theme', current);
+        updateIcon(current);
+      });
+      function updateIcon(mode){
+        document.querySelector('#themeToggle i').className = mode === 'light' ? 'ri-moon-line' : 'ri-sun-line';
+      }
+    })();
+
+    // Scroll reveal
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // Tilt effect nos cards
+    document.querySelectorAll('.tilt').forEach(card=>{
+      card.addEventListener('mousemove', (e)=>{
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left, y = e.clientY - rect.top;
+        const rx = ((y - rect.height/2)/rect.height)*8;
+        const ry = ((x - rect.width/2)/rect.width)*-8;
+        card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', ()=> card.style.transform = '');
+    });
+    // Tilt leve no mockup
+    (function(){
+      const el = document.getElementById('tiltCard');
+      if(!el) return;
+      el.addEventListener('mousemove', (e)=>{
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - r.left, y = e.clientY - r.top;
+        const rx = ((y - r.height/2)/r.height)*6;
+        const ry = ((x - r.width/2)/r.width)*-6;
+        el.style.transform = `rotateY(${ry}deg) rotateX(${rx}deg)`;
+      });
+      el.addEventListener('mouseleave', ()=> el.style.transform = '');
+    })();
+
+    // Slider depoimentos
+    (function(){
+      const slides = document.getElementById('slides');
+      const slider = document.getElementById('slider');
+      const controls = document.getElementById('sliderControls');
+      const total = slides.children.length;
+      let index = 0, timer;
+      for(let i=0; i<total; i++){
+        const dot = document.createElement('button'); dot.className = 'pill' + (i===0?' active':'');
+        dot.setAttribute('aria-label','Ir para depoimento ' + (i+1));
+        dot.addEventListener('click', ()=> go(i));
+        controls.appendChild(dot);
+      }
+      function go(i){
+        index = (i+total)%total;
+        slides.style.transform = `translateX(-${index*100}%)`;
+        controls.querySelectorAll('.pill').forEach((d,di)=> d.classList.toggle('active', di===index));
+        reset();
+      }
+      function next(){ go(index+1) }
+      function reset(){ clearInterval(timer); timer = setInterval(next, 5000) }
+      reset();
+      slider.addEventListener('mouseenter', ()=> clearInterval(timer));
+      slider.addEventListener('mouseleave', reset);
+    })();
+
+    // FAQ: fechar outros
+    document.querySelectorAll('#faq details').forEach((d)=>{
+      d.addEventListener('toggle', ()=>{
+        if(d.open){ document.querySelectorAll('#faq details').forEach(o=>{ if(o!==d) o.removeAttribute('open') }) }
+      })
+    });
+
+    // Botão back to top
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', ()=>{
+      const y = window.scrollY || document.documentElement.scrollTop;
+      toTop.classList.toggle('show', y > 600);
+    });
+    toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+    // Formulário com validação simples
+    const form = document.getElementById('contactForm');
+    const statusEl = document.getElementById('formStatus');
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      statusEl.textContent = '';
+      const data = Object.fromEntries(new FormData(form).entries());
+      // Validações básicas
+      if(!data.nome || !data.email || !data.mensagem){
+        statusEl.textContent = 'Preencha nome, e-mail e mensagem.';
+        return;
+      }
+      if(!/^\S+@\S+\.\S+$/.test(data.email)){
+        statusEl.textContent = 'Informe um e-mail válido.';
+        return;
+      }
+      // Simula envio
+      try{
+        // Integração real: Formspree / Getform / backend próprio
+        await new Promise(r=> setTimeout(r, 900));
+        form.reset();
+        statusEl.textContent = 'Mensagem enviada! Vou te responder em breve.';
+      }catch(err){
+        statusEl.textContent = 'Não consegui enviar agora. Tente novamente em instantes.';
+      }
+    });
+
+    // Atalho: preencher serviço no contato
+    window.gotoContato = function(serv){
+      document.getElementById('contato').scrollIntoView({behavior:'smooth'});
+      const sel = document.getElementById('servico');
+      sel.value = serv;
+      sel.dispatchEvent(new Event('change'));
+    }
+  </script>
+</body>
+</html>
+```
